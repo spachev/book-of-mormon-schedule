@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<title>Book of Mormon reading schedule</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="app.css" >
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-animate.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-aria.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-messages.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.8/angular-material.min.js"></script>
+<script src="book-of-mormon-data.js"/></script>
+<script src="app.js"/></script>
+</head>
+<body>
+	<div ng-app="bookOfMormonSchedule" ng-controller="appCtrl">
+		<div id="user-input" class="user-input-container">
+			<div class="row">
+				<div class="col-md-1 input-prompt">
+					Start date:
+				</div>
+				<div class="col-md-2">
+					<md-datepicker
+						ng-model="startDate"></md-datepicker>
+				</div>
+				<div class="col-md-1  input-prompt">
+					End date:
+				</div>
+				<div class="col-md-2">
+					<md-datepicker
+						ng-model="endDate"></md-datepicker>
+				</div>
+				<div class="col-md-6"></div>
+			</div>
+			<div class="row input-row">
+				<div class="col-md-2 input-prompt">
+					Starting from verse:
+				</div>
+				<div class="col-md-2">
+					<input ng-model="startingFromVerse" type="text">
+				</div>
+				<div class="col-md-6">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button ng-click="generateSchedule()">Generate Schedule</button>
+				</div>
+			</div>
+		</div>
+		<div id="schedule">
+			Schedule:
+			<div class="row schedule-header-row">
+				<div class="col-md-2 schedule-header-col"
+					ng-repeat="curCol in ['Date', 'Reading']">
+					{{curCol}}
+				</div>
+			</div>
+			<div class="row schedule-header-row" ng-repeat="o in schedule">
+				<div class="col-md-2 schedule-col">
+					{{o.date}}
+				</div>
+				<div class="col-md-3 schedule-col">
+					{{o.startVerse}} - {{o.endVerse}}
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
