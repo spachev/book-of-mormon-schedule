@@ -14,12 +14,28 @@ app.controller("appCtrl", function ($scope) {
 		return verse_to_ind[verse];
 	}
 
+	$scope.ucwords = function (s) {
+		return s.toLowerCase().replace(/\b[a-z]/, function (l) {
+			return l.toUpperCase();
+		});
+	}
+
 	$scope.parseVerse = function (s) {
-		return s;
+		s = s.trim();
+		var parts = s.split(/\s+/);
+		var v = parts.pop();
+		var book = parts.join(' ');
+		var vParts = v.split(':');
+		if (vParts.length == 1)
+			vParts.push('1');
+		v = vParts.join(':');
+		return $scope.ucwords(book) + ' ' + v;
 	}
 
 	$scope.getStartVerseInd = function () {
-		return $scope.getVerseInd($scope.parseVerse($scope.startingFromVerse));
+		var pVerse = $scope.parseVerse($scope.startingFromVerse);
+		//console.log("pVerse=" + pVerse);
+		return $scope.getVerseInd(pVerse);
 	}
 
 	$scope.generateSchedule = function () {
